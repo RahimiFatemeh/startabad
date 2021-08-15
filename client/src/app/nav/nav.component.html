@@ -1,0 +1,169 @@
+<header class="header js--feautures">
+    <nav>
+        <div class="row">
+            <img src="assets/img/logo-white.png" alt="logo" class="logo">
+            <img src="assets/img/logo-white.png" alt="logo" class="logo-black">
+            <ul class="main-nav js--main-nav">
+                    <li><a [routerLink]=""
+                        (click)="ngxSmartModalService.getModal('popupOne').open()"  
+                        *ngIf="!isLogin"  
+                        >ورود</a>
+                        <a [routerLink]="['/']"
+                        *ngIf="isLogin"  
+                        (click)="logout()"
+                        >خروج</a>
+                    </li>
+                    <li *ngIf="!isLogin"><a [routerLink]="['/register']" >ثبت نام</a></li>
+                    <li><a [routerLink]="['/admin/dashboard']">پنل مدیریت</a></li>
+                    <li><a href="#">ارتباط با ما </a></li>
+            </ul>
+            <a class="mobile-nav-icon js--icon-nav"><i class="ion-navicon-round"></i></a>
+        </div>
+    </nav>
+
+    <div class="header__text-box">
+        <h1 class="heading-primary">
+            <span class="heading-primary--main">استارت‌آباد</span>
+            <span class="heading-primary--sub">جایی برای پیشرفت شما</span>
+        </h1>
+
+        <a href="#section-tours" class="btn btn--white btn--animated">یادگیری رو شروع کن</a>
+    </div>
+</header>
+<div class="main">
+    <section class="section-about">
+        <div class="u-center-text u-margin-bottom-big">
+            <h2 class="heading-secondary">
+               تور هیجان انگیز برای پیشرفت شما
+            </h2>
+        </div>
+
+        <div class="row">
+            <div class="col-1-of-2">
+                <h3 class="heading-tertiary u-margin-bottom-small">شما عاشق این مسیر خواهید شد </h3>
+                <p class="paragraph">
+                    استارت آباد در جهت افزایش مهارت های شخصی افراد و هم چنین کمک به کسب درآمد
+                     در تلاش می باشد با کمک استارت آباد می توانید قله های موفقیت را فتح کنید.
+                </p>
+
+                <h3 class="heading-tertiary u-margin-bottom-small">تجربه حسی که هرگز احساس نکردید</h3>
+                <p class="paragraph">
+                در استارت اباد علاوه بر دوره‌های اموزشی با برگزاری باشگاه های صبحگاهی روزتان را با یک حس فوق‌العاده شروع می‌کنید    
+                </p>
+
+                <a href="#" class="btn-text">بیشتر بدانید&larr;</a>
+            </div>
+            <div class="col-1-of-2">
+                <div class="composition">
+                    <img src="assets/img/nat-1-large.jpg" alt="Photo 1" class="composition__photo composition__photo--p1">
+                    <img src="assets/img/nat-2-large.jpg" alt="Photo 2" class="composition__photo composition__photo--p2">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ------------------------------------ -->
+    <section class="section-features">
+        
+        <div class="row">
+            <div class="col-1-of-4" *ngFor="let course of Courses$ | async | slice:0:4">
+                <div class="feature-box" >
+                    <video width="100%" height="240" controls>
+                        <source [src]="course.movie" type="video/mp4">
+                      Your browser does not support the video tag.
+                      </video>
+                    <h3 class="feature-text heading-tertiary u-margin-bottom-small">{{course.title}}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row u-center-text">
+            <a href="#section-tours" class="btn btn--white btn--animated">مشاهده همه ویدئوها</a>
+        </div>
+    </section>  
+    <!-- ------------------------------------ -->
+    <section class="section-tours" id="section-tours">
+        <div class="u-center-text u-margin-bottom-big">
+            <h2 class="heading-secondary">
+                دوره‌های آموزشی
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-1-of-3" *ngFor="let course of Courses$ | async | slice:0:3 ; index as i">
+                <div class="card">
+                    <div class="card__side card__side--front">
+                         <div class="card__picture card__picture--{{i+1}}">
+                             &nbsp;
+                         </div>
+                         <h4 class="card__heading">
+                             <span class="card__heading-span card__heading-span--{{i+1}}">{{course.title}}</span>
+                         </h4>
+                         <div class="card__details">
+                             <ul>
+                                 <li>مدرس:{{course.instructor}}</li>
+                                 <li>مدت زمان: {{course.duration |date:'shortTime'}}</li>
+                                 <li>تعداد جلسات{{course.nubmerOfSession}} جلسه</li>
+                                 
+                             </ul>
+                         </div>
+                    </div>
+                    <div class="card__side card__side--back card__side--back-{{i+1}}">
+                         <div class="card__cta">
+                             <div class="card__price-box">
+                                 <p class="card__price-only">فقط</p>
+                                 <p class="card__price-value">{{course.price|currency}}</p>
+                             </div>
+                             <a href="#popup" class="btn btn--white">افزودن به سبد خرید</a>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="u-center-text u-margin-top-big">
+            <a [routerLink]="['/courses']" class="btn btn--green">مشاهده تمامی دوره‌ها</a>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="row">
+            <p class="footer-text">
+                 گروه استارت آباد در تابستان سال 1399 به همت یکی از اساتید گروه علم اطلاعات و دانش شناسی دانشگاه قم، 
+                جناب آقای مهندس مهرآبادی تشکیل و با جذب و بکارگیری تعدادی از دانشجویان مهندسی نرم افزار 
+                و رشته علم اطلاعات و دانش شناسی اقدام به راه اندازی این وب سایت نموده است
+                .اگر می خواهید انسان موفقی باشید استارت آبادی شوید
+            </p>
+        </div>
+    </footer>
+</div>
+
+<!-- ------------------- LOGIN FORM ---------------------- -->
+
+<ngx-smart-modal #popupOne [identifier]="'popupOne'">
+    <h1 class="u-margin-top-medium u-center-text form-width-70">فرم ورود</h1>
+        <form [formGroup]="loginForm" (ngSubmit)="login()" 
+                autocomplete="off">
+                <!-- *ngIf="(accountService.currentUser$ | async) === null" -->
+        <label for="username" >ایمیل</label>
+        <input 
+            formControlName = 'username'
+            type="text">
+        <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+            <div *ngIf="username?.errors?.required" class="alert-danger">ایمیل خود را وارد کنید</div>
+            <div *ngIf="username?.errors?.email" class="alert-danger" >لطفا یک ایمیل معتبر وارد کنید</div>
+        </div>
+
+        <label for="password">رمزعبور</label>
+        <input 
+            formControlName = 'password'
+            type="password">
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+            <div *ngIf="username?.errors?.required" class="alert-danger">رمزعبور خود را وارد کنید</div>
+        </div>
+        <div *ngIf="isLogin" class="alert-success">شما با موفقیت وارد شدید</div>
+        <div class="u-center-text u-margin-top-medium">
+            <button type="submit" class="btn--simple btn--purple">ورود</button>
+            <button (click)="popupOne.close()" class="btn--simple btn--red ">بستن</button>
+        </div>
+        </form>
+
+  </ngx-smart-modal>

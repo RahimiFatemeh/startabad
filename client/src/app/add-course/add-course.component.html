@@ -1,0 +1,87 @@
+  <form [formGroup]="addForm" (ngSubmit)="addCourse()"
+            autocomplete="off" class='form-block'>
+    <h3>اضافه کردن  دوره جدید</h3>
+
+    <div class="col-half">
+        <label for="title">عنوان</label>
+        <input 
+            formControlName="title"
+            type="text">
+    </div>
+
+    <div class="col-half">
+        <label for="price">قیمت</label>
+        <input 
+            formControlName='price'
+            type="text">
+    </div>
+    <div>
+    <div class="col-half">
+        <label for="nubmerOfSession">تعداد جلسات</label>
+        <input 
+            formControlName="nubmerOfSession"
+            type="text" >
+    </div>
+    <div class="col-half">
+        <label for="instructor">مدرس</label>
+        <input 
+            formControlName="instructor"
+            type="text" >
+    </div>
+    </div>
+
+    <label for="description">توضیحات</label>
+    <textarea autosize
+        formControlName='description'>
+    </textarea> 
+
+
+    <!-- <button (click)="addCourseItem()">add course items</button> -->
+
+
+    <!-- <div *ngFor="let in of [1,2,3] ;let i = index">
+        <hr>
+        <div>
+            <div class="col-half">
+                <label for="nubmerOfSession">عنوان</label>
+                <input 
+                    formControlName=""
+                    type="text" >
+            </div>
+            <div class="col-half">
+                <label for="instructor">مدت زمان</label>
+                <input 
+                    formControlName=""
+                    type="text" >
+            </div>
+            </div>
+        
+            <label for="description">توضیحات</label>
+            <textarea autosize
+                formControlName=''>
+            </textarea> 
+    </div>
+     -->
+   
+   
+     <!-- <div class="col-half">
+        <input 
+            formControlName="duration"
+            type="text" 
+            placeholder="مدت زمان"
+            class="input-group"
+            >
+    </div> -->
+    
+    <!-- <select class="input-group" (change)="changeGroup($event)" formControlName="groupId">
+        <option value="" disabled>انتخاب گروه مقاله</option>
+        <option *ngFor="let group of groups" [ngValue]="group.id">{{group.title}}</option>
+    </select> -->
+
+    <app-upload
+        (onUploadFinished)="uploadFinished($event)"
+    ></app-upload>
+    <div class="u-center-text u-margin-top-huge">
+        <button type="submit" class="btn--simple btn--purple">اضافه کردن</button> 
+    </div>
+</form>

@@ -1,0 +1,13 @@
+<form #loginForm="ngForm" class="" (ngSubmit)="addgroup()" 
+            autocomplete="off" class="form-block">
+
+    <h3>
+       اضافه کردن گروه
+    </h3>
+    <label for="Title">نام گروه</label>
+    <input 
+        name="Title"
+        [(ngModel)]="model.Title"
+        type="text">
+    <button class="btn--simple btn--purple">اضافه کردن</button>
+</form>

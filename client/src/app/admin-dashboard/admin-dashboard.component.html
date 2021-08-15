@@ -1,0 +1,103 @@
+<div class="wrapper">
+
+    <!-- /. NAV TOP  -->
+    <div class="navbar-default navbar-side col-1-of-3" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+            <li class="active-link">
+                <a [routerLink]="" (click)="changeComponent('dashboard')">
+                    <span class="my-icon">
+                        <img src = "../../assets/icons/desktop-solid.svg" alt="" class="svg-icon"/>
+                    </span>
+                    <span class="my-text">
+                         میزکار  
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="" (click)="changeComponent('users')">
+                    <span class="my-icon">
+                        <img src = "../../assets/icons/user-circle-solid.svg" alt="" class="svg-icon"/>
+                    </span>
+                    <span class="my-text">
+                        کاربران
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="" (click)="changeComponent('course')" >
+                    <span class="my-icon">
+                        <img src = "../../assets/icons/graduation-cap-solid.svg" alt="" class="svg-icon"/>
+                    </span>
+                    <span class="my-text">
+                        دوره‌های آموزشی 
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="" (click)="changeComponent('article')" >
+                    <span class="my-icon">
+                        <img src = "../../assets/icons/newspaper-regular.svg" alt="" class="svg-icon"/>
+                    </span>
+                    <span class="my-text">
+                        مقالات
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="" (click)="changeComponent('group')">
+                    <span class="my-icon">
+                        <img src = "../../assets/icons/object-group-regular.svg" alt="" class="svg-icon"/>
+                    </span>
+                    <span class="my-text">
+                        گروه مقالات
+                    </span>
+                </a>
+            </li>            
+        </ul>
+     </div>
+    </div>
+
+    <div class="col-2-of-3 main-nav" [ngSwitch]="whichComponent">
+        <div *ngSwitchCase="'Index'">
+            میزکار
+        </div>
+        <div *ngSwitchCase="'users'">
+            <table>
+                <tr>
+                    <th>نام</th>
+                    <th>نام کاربری</th>
+                    <th>شماره تماس</th>
+                </tr>
+                <tr *ngFor="let user of users">
+                    <td> {{user.name}} </td>
+                    <td> {{user.username}} </td>
+                    <td> {{user.phone}} </td>
+                </tr>
+            </table>
+        </div>
+
+        <app-admin-article *ngSwitchCase="'article'"></app-admin-article>
+
+        <app-courses *ngSwitchCase="'course'"></app-courses>
+
+        <div *ngSwitchCase="'group'">
+            <a [routerLink]="['/admin/group/add']" class="btn--simple btn--purple" >اضافه کردن گروه جدید</a>
+            <table>
+                <tr>
+                    <th>نام گروه</th>
+                    <th>   </th>
+                </tr>
+                <tr *ngFor="let group of groups">
+                    <td> {{group.title}} </td>
+                    <td class="add-edit-icons">
+                        <i class="fa fa-pencil-square-o edit-icon" aria-hidden="true"></i>
+                        <i class="fa fa-trash-o remove-icon" aria-hidden="true"></i>
+                      </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+</div>

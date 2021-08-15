@@ -1,0 +1,53 @@
+<div class="row" style="margin-bottom:1rem;">
+    <div class="col-md-3">
+
+      <input 
+        type="file" 
+        #file placeholder="انتخاب تصویر" 
+        
+        (change)="uploadFile(file.files)"
+        class="file-input">
+      
+      <div class="file-upload">
+        {{fileName|| "هنوز فایلی انتخاب نشده است."}}
+        <button 
+          mat-mini-fab 
+          class="upload-btn"
+          type="button"
+          (click)="file.click()">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <span class="upload" *ngIf="progress > 0">
+        {{progress}}%
+      </span>
+      <span class="upload" *ngIf="message">
+        {{message}}
+      </span>
+    </div>
+
+    <div class="progress">
+
+    <mat-progress-bar 
+      class="progress-bar" 
+      mode="determinate"
+      [value]="progress"
+      *ngIf="progress">
+    </mat-progress-bar>
+    
+    <mat-icon class="cancel-upload" (click)="cancelUpload()" 
+                *ngIf="progress">delete
+    </mat-icon> 
+    
+    </div>
+</div>
+
+      <!-- <input 
+        formControlName='image'
+        type="file" 
+        class="file-input"
+        accept="image/*"
+       >-->

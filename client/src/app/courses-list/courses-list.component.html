@@ -1,0 +1,71 @@
+<!-- <tr>
+    <td>
+        <table class="display">
+          <thead>
+            <tr>
+              <th>عنوان</th>
+              <th>توصیحات</th>
+              <th>مدت زمان</th>
+              <th>مدرس</th>
+              <th>قیمت</th>
+              <th>add</th>
+              <th>edit</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of Courses$ | async">
+              <td>{{item.id}}</td>
+              <td>{{item.title}}</td>
+              <td>{{item.duration}}</td>
+              <td>{{item.instructor}}</td>
+              <td>{{item.price | currency}}</td>
+              <td><button (click)="addToCart(item)">add</button></td>
+              <td>
+                <button 
+                
+                  (click)="removeFromCart(item.id)"> remove
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+    </td>
+</tr> -->
+<a [routerLink]="['/basket-summary' ]" class="btn btn--green">مشاهده سبد خرید</a>
+
+<div class="container">
+
+<div class="row">
+  <div class="col-1-of-3" *ngFor="let course of Courses$ | async ; index as i">
+      <div class="card">
+          <div class="card__side card__side--front">
+               <div class="card__picture card__picture--{{i+1}}">
+                   &nbsp;
+               </div>
+               <h4 class="card__heading">
+                   <span class="card__heading-span card__heading-span--{{i+1}}">{{course.title}}</span>
+               </h4>
+               <div class="card__details">
+                   <ul>
+                       <li>مدرس:{{course.instructor}}</li>
+                       <li>مدت زمان: {{course.duration |date:'shortTime'}}</li>
+                       <li>تعداد جلسات{{course.nubmerOfSession}} جلسه</li>
+                       
+                   </ul>
+               </div>
+          </div>
+          <div class="card__side card__side--back card__side--back-{{i+1}}">
+               <div class="card__cta">
+                   <div class="card__price-box">
+                       <p class="card__price-only">فقط</p>
+                       <p class="card__price-value">{{course.price|currency}}</p>
+                   </div>
+                   <a [routerLink]="" (click)="addToCart(course)" class="btn btn--white" >افزودن به سبد خرید</a>
+               </div>
+           </div>
+      </div>
+  </div>
+</div>
+
+</div>

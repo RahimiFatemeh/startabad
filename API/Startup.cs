@@ -1,0 +1,93 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using API.Data;
+using API.Helper;
+using API.Interfaces;
+using API.Middleware;
+using API.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
+
+namespace API
+{
+    public class Startup
+    {
+        private readonly IConfiguration _config;
+        public Startup(IConfiguration config)
+        {
+            _config = config;
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(options => 
+            {
+                options.UseSqlite(_config.GetConnectionString("DefaultConnention"));
+            });
+            services.AddScoped<ITokenService , TokenService>();
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+            });
+            services.AddCors();
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+
+            services.Configure<FormOptions>(o => {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                // app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
+            }
+
+            app.UseMiddleware<ExceptionMiddleware>();
+
+            app.UseHttpsRedirection();
+               
+            app.UseStaticFiles();            
+  
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), @"Resources/Images")),
+                RequestPath = new PathString("/Resources/Images")
+            });
+
+            app.UseRouting();
+
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+        }
+    }
+}

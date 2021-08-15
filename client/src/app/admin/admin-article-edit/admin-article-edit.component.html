@@ -1,0 +1,17 @@
+<form #editForm="ngForm" id="editForm" class="add-article" (ngSubmit)="updateArticle()">
+    <div>
+        <h4>عنوان</h4>
+        <input [(ngModel)]="article.title" name="title" >
+    </div>
+    <h4>نویسنده</h4>
+    <input  [(ngModel)]="article.author" name="author" >
+    <h4>متن</h4>
+    <textarea  autosize
+        [(ngModel)]="article.body" name="body">
+    </textarea>
+
+    <div class="u-center-text u-margin-top-huge">
+        <button [disabled]="!editForm.dirty" class="btn btn--green btn-submit">ثبت تغییرات</button>
+    </div>
+</form> 
+

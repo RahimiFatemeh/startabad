@@ -1,0 +1,28 @@
+<a [routerLink]="['/admin/course/add']" class="btn--simple btn--purple u-margin-bottom-small ">اضافه کردن دوره جدید</a>
+<input (keyup.enter)="Search()" type="text" class="search-input" placeholder="جستجو کنید ... ">      
+
+<table>
+    <tr>
+      <th>عنوان</th>
+      <th>توصیحات</th>
+      <th>مدت زمان</th>
+      <th>مدرس</th>
+      <th>قیمت</th>
+      <th> </th>
+    </tr>
+    <tr *ngFor="let item of Courses$ | async">
+      <td>{{item.title | uppercase}}</td>
+      <td>{{item.description}}</td>
+      <td>{{item.duration}}</td>
+      <td>{{item.instructor}}</td>
+      <td>{{item.price | currency}}</td>
+      <td class="add-edit-icons">
+        <span class=""> 
+          <img src = "../../assets/icons/edit-regular.svg" alt="" class="svg-icon" />
+        </span>
+        <span class="">
+          <img src = "../../assets/icons/trash-alt-regular.svg" alt="" class="svg-icon"/>
+        </span>
+      </td>
+    </tr>
+  </table>

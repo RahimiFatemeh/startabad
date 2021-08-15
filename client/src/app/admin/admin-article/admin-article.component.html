@@ -1,0 +1,28 @@
+<a [routerLink]="['/admin/article/add']" class="btn--simple btn--purple u-margin-bottom-small ">اضافه کردن مقاله جدید</a>
+<input (keyup.enter)="SearchInArticle()" type="text" class="search-input" placeholder="جستجو کنید ... ">      
+        <table DIR="RTL">
+            <tr>
+              <th scope="col">عنوان</th>
+              <th scope="col">نویسنده</th>
+              <th scope="col">متن</th>
+              <th scope="col">تاریخ ثبت</th>
+              <th scope="col">عملیات</th>
+            </tr>
+            <tr *ngFor="let item of Articles$ | async">
+              <td data-label="عنوان">{{item.title}}</td>
+              <td data-label="نویسنده">{{item.author}}</td>
+              <td data-label="متن">{{item.body | summary}}</td>
+              <td data-label="تاریخ ثبت">{{item.date | date:'YYYY/MM/dd' |dateToPersian}}</td>
+              <!-- <td><img [src]="createImgPath(item.photo)" alt="article picture" style="width:60px; height:60px;"></td> -->
+              <td data-label="" class="add-edit-icons">
+                <span>
+                  <a [routerLink]="['/admin/article/edit', item.id]">
+                    <i class="fa fa-pencil-square-o edit-icon" aria-hidden="true"></i>
+                  </a>
+                </span>
+                <span>
+                  <i (click)="deleteArticle(item.id)" class="fa fa-trash-o remove-icon" aria-hidden="true"></i>
+                </span>
+              </td>
+            </tr>
+          </table>

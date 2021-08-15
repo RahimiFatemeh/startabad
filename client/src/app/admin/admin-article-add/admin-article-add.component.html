@@ -1,0 +1,41 @@
+<form [formGroup]="addArticleForm" (ngSubmit)="addArticle()"
+            autocomplete="off" class='form-block'>
+    <h1>اضافه کردن  نوشته جدید</h1>
+    <div class="col-half">
+        <input 
+            formControlName="title"
+            type="text" 
+            placeholder="عنوان"
+            class="input-group"
+            >
+    </div>
+    <div class="col-half">
+        <input 
+            formControlName='author'
+            type="text" 
+            placeholder="نویسنده"
+            class="form-control"
+            class="input-group"
+            >
+    </div>
+    
+    <select class="input-group" (change)="changeGroup($event)" formControlName="groupId">
+        <option value="" disabled>انتخاب گروه مقاله</option>
+        <option *ngFor="let group of groups" [ngValue]="group.id">{{group.title}}</option>
+    </select>
+
+    <textarea autosize
+        formControlName='body'
+        placeholder="متن"
+        class="form-control"
+        class="input-group"
+        >
+    </textarea>
+        
+    <app-upload 
+        (onUploadFinished)="uploadFinished($event)"
+    ></app-upload>
+    <div class="u-center-text u-margin-top-huge">
+        <button type="submit">اضافه کردن</button> 
+    </div>
+</form>

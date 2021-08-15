@@ -1,0 +1,15 @@
+<p>basket-summary works!</p>
+
+<table *ngIf="items">
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+    <th>  </th>
+    <tr *ngFor="let item of items">
+      <td>{{item.title}}</td>
+      <td>{{item.price | currency}}</td>
+      <td><button (click)="reomveFromBasket(item.id)">Remove</button></td>
+    </tr>
+  </table>
+
+  <a href="https://www.w3schools.com">اتصال به درگاه بانکی - تکمیل خرید</a>

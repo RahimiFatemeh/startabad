@@ -1,0 +1,53 @@
+.file-input {
+    display: none;
+  }
+.add-article {
+  max-width: 100em;
+  padding: 1em 3em 2em 3em;
+  margin: 0em auto;
+  background-color: #fff;
+  border-radius: 4.2px;
+  box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+}
+input,
+input[type="radio"] + label,
+input[type="checkbox"] + label:before,
+select option,
+textarea,
+select {
+  width: 100%;
+  padding: 1em;
+  line-height: 1.4;
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+input:focus , textarea:focus , select option:focus  , select:focus {
+  outline: 0;
+  border-color: #bd8200;
+}
+input:focus + .input-icon i {
+  color: #f0a500;
+}
+input:focus + .input-icon:after {
+  border-right-color: #f0a500;
+}
+
+.input-group {
+  margin-bottom: 1em;
+  zoom: 1;
+}
+.col-half {
+  padding-right: 10px;
+  width: 50%;
+  float: right;
+}
+.col-half:first-of-type {
+  padding-right: 0;
+}
+

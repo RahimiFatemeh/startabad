@@ -1,0 +1,18 @@
+.file-input {
+    display: none;
+  }
+
+.upload-btn{
+  color:#fff ;
+  background-color: var(--Dark-color);
+  border: none;
+  border-radius: 50px;
+  padding: 5px;
+}
+.upload-btn:hover{
+  cursor: pointer;
+}
+
+.cancel-upload{
+  color : rgb(65, 5, 18) ; 
+}
